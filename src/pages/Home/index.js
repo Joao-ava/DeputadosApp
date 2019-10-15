@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {View, FlatList} from 'react-native';
+import {Provider} from 'react-redux';
 
 import api from '../../services/api';
+import store from '../../store';
 
 import DeputadoCard from '../../components/DeputadoCard';
-
-// import { Container } from './styles';
 
 export default function Home(props) {
   const [deputados, setDeputados] = useState([]);
@@ -26,7 +26,7 @@ export default function Home(props) {
   }, []);
 
   return (
-    <View>
+    <Provider store={store}>
       <FlatList
         data={deputados}
         keyExtractor={item => String(item.id)}
@@ -44,6 +44,6 @@ export default function Home(props) {
         onEndReached={fetchData}
         onEndReachedThreshold={0.1}
       />
-    </View>
+    </Provider>
   );
 }
