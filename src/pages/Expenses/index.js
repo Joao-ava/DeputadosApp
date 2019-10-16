@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {FlatList, Text} from 'react-native';
-import {Provider} from 'react-redux';
 
 import api from '../../services/api';
-import store from '../../store';
 
 export default function Expenses(props) {
 	const id = props.navigation.getParam('id');
@@ -16,12 +14,10 @@ export default function Expenses(props) {
 	}
 
 	return (
-		<Provider store={store}>
-			<FlatList 
-				data={data}
-				keyExtractor={item => String(item.codDocumento)}
-				onRender={({item}) => <Text>teste {item.codDocumento}</Text>}
-			/>
-		</Provider>
+		<FlatList 
+			data={data}
+			keyExtractor={item => String(item.codDocumento)}
+			onRender={({item}) => <Text>teste {item.codDocumento}</Text>}
+		/>
 	);
 }
