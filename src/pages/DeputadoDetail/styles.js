@@ -8,12 +8,15 @@ export const Center = styled.View`
   align-items: center;
 `;
 
-export const Photo = styled.Image`
-  height: 180px;
-  width: 150px;
+export const Frame = styled.View`
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 7px;
   overflow: hidden;
+`;
+
+export const Photo = styled.Image`
+  height: 180px;
+  width: 150px;
 `;
 
 export const Name = styled.Text`

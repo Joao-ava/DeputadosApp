@@ -5,6 +5,7 @@ import api from '../../services/api';
 import {
   Container,
   Center,
+  Frame,
   Photo,
   Name,
   Row,
@@ -41,7 +42,9 @@ export default function DeputadoDetail(props) {
   return (
     <Container>
       <Center>
-        <Photo source={{uri: photo}} />
+        <Frame>
+          <Photo source={{uri: photo}} />
+        </Frame>
         <Name>{nome}</Name>
       </Center>
 
