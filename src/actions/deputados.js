@@ -7,11 +7,11 @@ export function addDeputados(deputados) {
 	};
 }
 
-export function setDeputado(deputado) {
+export function setDeputados(deputados) {
 	return {
-		type: 'SET_DEPUTADO',
+		type: 'SET_DEPUTADOS',
 		payload: {
-			deputado,
+			deputados,
 		},
 	};
 }
