@@ -6,7 +6,7 @@ export default function DeputadoCard(props) {
   const {deputado} = props;
 
   return (
-    <Container {...props}>
+    <Container>
       <Photo source={{uri: deputado.urlFoto}} />
 
       <About>

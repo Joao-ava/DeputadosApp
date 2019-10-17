@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import {View, FlatList} from 'react-native';
+import {View, FlatList, TouchableOpacity} from 'react-native';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import api from '../../services/api';
 import store from '../../store';
 import * as deputadosActions from '../../actions/deputados';
+import * as selectedActions from '../../actions/selected';
 
 import DeputadoCard from '../../components/DeputadoCard';
 
 function Home(props) {
-  const [deputados, setDeputados] = useState([]);
   const [page, setPage] = useState(1);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -23,6 +23,27 @@ function Home(props) {
     setPage(page + 1);
   }
 
+  function renderItem({item}) {
+    return (
+      <TouchableOpacity
+        onPress={() => selectItem(item)}
+      >
+        <DeputadoCard
+          deputado={item}
+        />
+      </TouchableOpacity>
+    )
+  }
+
+  function selectItem(item) {
+    props.setSelected(item.id);
+
+    props.navigation.navigate('DeputadoDetail', {
+      id: item.id,
+      photo: item.urlFoto,
+    })
+  }
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -31,17 +52,7 @@ function Home(props) {
     <FlatList
       data={props.deputados}
       keyExtractor={item => String(item.id)}
-      renderItem={({item}) => (
-        <DeputadoCard
-          deputado={item}
-          onPress={() =>
-            props.navigation.navigate('DeputadoDetail', {
-              id: item.id,
-              photo: item.urlFoto,
-            })
-          }
-        />
-      )}
+      renderItem={renderItem}
       onEndReached={fetchData}
       onEndReachedThreshold={0.1}
     />
@@ -52,7 +63,10 @@ const mapStateToProps = state => ({
   deputados: state.deputados,
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators(deputadosActions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {...deputadosActions, ...selectedActions}, 
+  dispatch
+);
 
 export default connect(
   mapStateToProps,
