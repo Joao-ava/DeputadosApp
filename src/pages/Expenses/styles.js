@@ -12,6 +12,13 @@ export const Expense = styled.Text`
 	font-size: 16px;
 `;
 
-export const Price = styled.Text`
+export const Row = styled.View`
+	flex-direction: row;
+	justify-content: space-between;
+`;
+
+export const Info = styled.Text`
 	font-size: 12px;
-`
+	margin: 6px;
+	width: 50%;
+`;

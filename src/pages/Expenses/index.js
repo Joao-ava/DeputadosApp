@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import api from '../../services/api';
 import store from '../../store';
 
-import {Card, Expense, Price} from './styles';
+import {Card, Expense, Row, Info} from './styles';
 
 function Expenses(props) {
 	const id = props.selected;
@@ -16,7 +16,7 @@ function Expenses(props) {
 
 	async function fetchData() {
 		const response = await api.get(
-			`deputados/${id}/despesas?pagina=1&itens=15&ordem=ASC&ordenarPor=ano`
+			`deputados/${id}/despesas?pagina=1&itens=15&ordem=ASC&ordenarPor=dataDocumento`
 		);
 
 		setData(response.data.dados);
@@ -27,7 +27,11 @@ function Expenses(props) {
 		return (
 			<Card>
 				<Expense>{item.tipoDespesa}</Expense>
-				<Price>{item.valorLiquido}</Price>
+
+				<Row>
+					<Info>{item.dataDocumento || item.ano}</Info>
+					<Info>R$ {item.valorLiquido}</Info>
+				</Row>
 			</Card>
 		);
 	}
