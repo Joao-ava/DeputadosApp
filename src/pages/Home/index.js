@@ -11,16 +11,13 @@ import * as selectedActions from '../../actions/selected';
 import DeputadoCard from '../../components/DeputadoCard';
 
 function Home(props) {
-  const [page, setPage] = useState(1);
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   async function fetchData() {
     const response = await api.get(
-      `deputados?pagina=${page}&itens=15&ordem=ASC&ordenarPor=nome`,
+      `deputados?pagina=${props.page}&itens=15&ordem=ASC&ordenarPor=nome`,
     );
 
     props.addDeputados(response.data.dados);
-    setPage(page + 1);
   }
 
   function renderItem({item}) {
@@ -60,7 +57,8 @@ function Home(props) {
 }
 
 const mapStateToProps = state => ({
-  deputados: state.deputados,
+  deputados: state.deputados.data,
+  page: state.deputados.page,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators(
