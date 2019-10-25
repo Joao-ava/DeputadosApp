@@ -14,7 +14,7 @@ function Home(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   async function fetchData() {
     const response = await api.get(
-      `deputados?pagina=${props.page}&itens=15&ordem=ASC&ordenarPor=nome`,
+      `deputados?pagina=${props.page}&itens=15&ordem=ASC&ordenarPor=nome&nome=${props.search}`,
     );
 
     props.addDeputados(response.data.dados);
@@ -59,6 +59,7 @@ function Home(props) {
 const mapStateToProps = state => ({
   deputados: state.deputados.data,
   page: state.deputados.page,
+  search: state.search.name,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators(

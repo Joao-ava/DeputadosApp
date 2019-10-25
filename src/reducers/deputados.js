@@ -13,7 +13,7 @@ export default function deputados(state={data:[], page:1}, action) {
 		case 'SET_DEPUTADOS':
 			return {
 				data: action.payload.deputados,
-				page: 1,
+				page: 2,
 			};
 
 		default:
